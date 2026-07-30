@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<title>About / CV — Jonas Cawley</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#E9E2D3;
+    --paper-dim:#DED5C1;
+    --ink:#2A241C;
+    --ink-soft:#4A4234;
+    --stone:#8C8271;
+    --line:#C9BFA9;
+    --moss:#5B6142;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:'Archivo',sans-serif;font-weight:400;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--moss);color:var(--paper);}
+  :focus-visible{outline:2px solid var(--moss);outline-offset:3px;}
+  .display{font-family:'Fraunces',serif;font-weight:400;letter-spacing:-0.01em;}
+
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:28px clamp(20px,4vw,56px);
+    mix-blend-mode:difference;color:#fff;
+  }
+  header *{color:#fff;}
+  .logo{font-family:'Fraunces',serif;font-style:italic;font-size:19px;letter-spacing:0.01em;}
+  nav{display:flex;gap:clamp(16px,2.5vw,40px);}
+  nav a{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;position:relative;padding-bottom:3px;}
+  nav a::after{
+    content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;
+    background:currentColor;transform:scaleX(0);transform-origin:right;
+    transition:transform .35s cubic-bezier(.65,0,.35,1);
+  }
+  nav a:hover::after{transform:scaleX(1);transform-origin:left;}
+
+  /* ---------- INTRO ---------- */
+  .about-hero{
+    padding:clamp(120px,18vw,180px) clamp(20px,4vw,56px) 72px;
+    max-width:980px;
+  }
+  .about-kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--moss);}
+  .about-hero h1{
+    font-size:clamp(38px,6vw,72px);font-style:italic;line-height:1.05;
+    margin:16px 0 28px;
+  }
+  .about-hero p{
+    font-size:clamp(16px,1.6vw,19px);line-height:1.7;color:var(--ink-soft);
+    max-width:68ch;
+  }
+  .about-hero p + p{margin-top:18px;}
+
+  .about-row{
+    display:grid;grid-template-columns:1fr 220px;gap:32px;align-items:start;
+    padding:32px 0;border-top:1px solid var(--line);
+  }
+  .about-row:first-child{border-top:none;padding-top:0;}
+  .about-photo{aspect-ratio:4/3;overflow:hidden;background:var(--paper-dim);}
+  .about-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+  .about-photo-cap{margin-top:8px;font-size:10px;letter-spacing:.05em;color:var(--stone);text-transform:uppercase;}
+
+  @media (max-width:820px){
+    .about-row{grid-template-columns:1fr;gap:16px;}
+    .about-row .about-photo{max-width:200px;}
+  }
+  .fun-facts{
+    display:flex;flex-wrap:wrap;gap:28px 48px;
+    margin-top:36px;padding-top:28px;border-top:1px solid var(--line);
+    max-width:68ch;
+  }
+  .fun-facts > div{display:flex;flex-direction:column;gap:6px;}
+  .fact-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);}
+  .fact-value{font-family:'Fraunces',serif;font-style:italic;font-size:17px;color:var(--ink);}
+  .cv-download{
+    display:inline-flex;align-items:center;gap:10px;
+    margin-top:36px;padding:14px 26px;
+    border:1px solid var(--ink);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+    position:relative;overflow:hidden;
+  }
+  .cv-download span{position:relative;z-index:1;transition:color .3s ease;}
+  .cv-download::before{
+    content:"";position:absolute;inset:0;background:var(--ink);
+    transform:translateY(101%);transition:transform .4s cubic-bezier(.65,0,.35,1);
+  }
+  .cv-download:hover::before{transform:translateY(0);}
+  .cv-download:hover span{color:var(--paper);}
+
+  /* ---------- CV SECTIONS ---------- */
+  .cv-wrap{
+    display:grid;grid-template-columns:1fr 1.6fr;gap:clamp(32px,5vw,72px);
+    padding:0 clamp(20px,4vw,56px) 100px;
+  }
+  .cv-col h2{
+    font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);
+    border-top:1px solid var(--line);padding-top:20px;margin-bottom:24px;
+  }
+  .skills-list{list-style:none;display:flex;flex-wrap:wrap;gap:10px 0;}
+  .skills-list li{
+    font-size:14px;color:var(--ink-soft);width:100%;padding:10px 0;border-bottom:1px solid var(--line);
+  }
+  .skills-list li:first-child{border-top:none;}
+
+  .skill-item{
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+  }
+  .skill-scale{display:flex;gap:4px;flex:none;}
+  .skill-scale i{
+    display:block;width:16px;height:6px;background:var(--paper-dim);
+    border:1px solid var(--line);font-style:normal;
+  }
+  .skill-scale i.filled{background:var(--moss);border-color:var(--moss);}
+
+  .cv-entry{
+    border-top:1px solid var(--line);padding:26px 0;
+    display:grid;grid-template-columns:140px 1fr;gap:20px;
+  }
+  .cv-entry:last-child{border-bottom:1px solid var(--line);}
+  .cv-entry .years{font-size:12px;letter-spacing:.06em;color:var(--moss);text-transform:uppercase;}
+  .cv-entry h3{font-size:19px;font-style:italic;font-weight:400;margin-bottom:6px;}
+  .cv-entry .org{font-size:13px;color:var(--ink-soft);}
+  .cv-entry .loc{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--stone);margin-top:4px;}
+
+  @media (max-width:820px){
+    header{padding:20px 20px;}
+    nav{gap:18px;}
+    .cv-wrap{grid-template-columns:1fr;}
+    .cv-entry{grid-template-columns:1fr;gap:6px;}
+  }
+
+  /* ---------- FOOTER (shared) ---------- */
+  footer{border-top:1px solid var(--line);padding:56px clamp(20px,4vw,56px) 36px;}
+  .foot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;padding-bottom:56px;}
+  .foot-grid h3{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);margin-bottom:14px;font-weight:400;}
+  .foot-grid p, .foot-grid a{display:block;font-size:14px;line-height:1.9;color:var(--ink-soft);}
+  .foot-grid a:hover{color:var(--moss);}
+  .foot-brand{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(32px,5vw,64px);line-height:1;}
+  .foot-bottom{
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:11px;color:var(--stone);letter-spacing:.04em;
+    padding-top:24px;border-top:1px solid var(--line);flex-wrap:wrap;gap:10px;
+  }
+  @media (max-width:820px){.foot-grid{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">Jonas Cawley</a>
+  <nav>
+    <a href="index.html">Portfolio</a>
+    <a href="about.html">About / CV</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="about-hero">
+  <span class="about-kicker">About</span>
+  <h1 class="display">Son of a Teamster and a Teacher, designing work full of humanity.</h1>
+
+  <div class="about-row">
+    <p>Born and raised in Bozeman, Montana, Jonas often connects with people who love mountains, trees, and rivers. While exploring these open spaces he discovered an appreciation for the built environment and the comforts we are so privileged to return back to. Pretty soon, legos turned into two by fours and Jonas became the designated family helper. Not too shortly after high school graduation and competing on the national stage as a mogul skier, he decided to leave the comforts of Gallatin Valley and study architecture at the University of Oregon.</p>
+    <div>
+      <div class="about-photo"><img src="images/about/rafting.jpg" alt="Jonas Cawley rowing on the Rogue River"></div>
+      <div class="about-photo-cap">Rowing on the Rogue River</div>
+    </div>
+  </div>
+
+  <div class="about-row">
+    <p>The path wasn't easy as anyone who studies architecture is well aware, but Jonas found inspiration through other arts such as cooking and music. He also spent his free time managing the 220-member freestyle ski team. As Vice President of the club sport he assisted strategic event planning, fundraising initiatives, and coordinating travel logistics to Mt. Bachelor. Jonas' work spanned industrial, commercial, residential and institutional design, each program attracted him to the technical nature of structure and enclosure to help develop senses of scale, rhythm, and protection. The detail-driven, sustainable building values reflected the genuine interest of mass timber's responsibility in lowering construction's embodied carbon.</p>
+    <div>
+      <div class="about-photo"><img src="images/about/profile-crit.jpg" alt="Jonas Cawley presenting the Bill Walton Memorial Middle School studio project"></div>
+      <div class="about-photo-cap">Final review — Bill Walton Memorial Middle School</div>
+    </div>
+  </div>
+
+  <div class="fun-facts">
+    <div><span class="fact-label">Favorite Designer</span><span class="fact-value">Luis Barragán</span></div>
+    <div><span class="fact-label">Latest Read</span><span class="fact-value">Siddhartha by Hermann Hesse</span></div>
+    <div><span class="fact-label">Current Music Obsession</span><span class="fact-value">Marvin Gaye or Sturgill Simpson</span></div>
+  </div>
+  <a href="Jonas_Cawley_CV.pdf" class="cv-download"><span>Download CV</span></a>
+</section>
+
+<div class="cv-wrap">
+  <div class="cv-col">
+    <h2>Education</h2>
+    <div class="cv-entry" style="grid-template-columns:1fr;">
+      <div>
+        <span class="years">2021 – 2026</span>
+        <h3 class="display">B.Arch, minor in Landscape Architecture</h3>
+        <p class="org">University of Oregon — 5-year accredited program</p>
+        <p class="loc">Eugene, OR</p>
+      </div>
+    </div>
+    <div class="cv-entry" style="grid-template-columns:1fr;">
+      <div>
+        <span class="years">2017 – 2021</span>
+        <h3 class="display">Honors Diploma</h3>
+        <p class="org">Bozeman High School</p>
+        <p class="loc">Bozeman, MT</p>
+      </div>
+    </div>
+
+    <h2 style="margin-top:48px;">Skills</h2>
+    <ul class="skills-list">
+      <li>Design thinking &amp; problem solving</li>
+      <li>Attention to detail under pressure</li>
+      <li>Public speaking through studio critiques</li>
+      <li>Cross-disciplinary collaboration</li>
+      <li>Sustainable design principles</li>
+      <li>Design iteration &amp; incorporating feedback</li>
+      <li>CPR / First Aid</li>
+    </ul>
+
+    <h2 style="margin-top:48px;">Programs</h2>
+    <div style="display:flex;justify-content:space-between;font-size:11px;letter-spacing:.04em;color:var(--stone);margin-bottom:12px;">
+      <span>Novice</span><span>Intermediate</span><span>Advanced</span><span>Expert</span>
+    </div>
+    <ul class="skills-list">
+      <li class="skill-item">
+        <span>Rhino / Grasshopper / Karamba</span>
+        <span class="skill-scale" aria-label="Advanced"><i class="filled"></i><i class="filled"></i><i class="filled"></i><i></i></span>
+      </li>
+      <li class="skill-item">
+        <span>Revit</span>
+        <span class="skill-scale" aria-label="Novice"><i class="filled"></i><i></i><i></i><i></i></span>
+      </li>
+      <li class="skill-item">
+        <span>Adobe Creative Suite</span>
+        <span class="skill-scale" aria-label="Advanced"><i class="filled"></i><i class="filled"></i><i class="filled"></i><i></i></span>
+      </li>
+      <li class="skill-item">
+        <span>Twinmotion</span>
+        <span class="skill-scale" aria-label="Novice"><i class="filled"></i><i></i><i></i><i></i></span>
+      </li>
+      <li class="skill-item">
+        <span>Climate Studio Daylighting</span>
+        <span class="skill-scale" aria-label="Advanced"><i class="filled"></i><i class="filled"></i><i class="filled"></i><i></i></span>
+      </li>
+      <li class="skill-item">
+        <span>Microsoft Office</span>
+        <span class="skill-scale" aria-label="Intermediate"><i class="filled"></i><i class="filled"></i><i></i><i></i></span>
+      </li>
+      <li class="skill-item">
+        <span>Laser Cutting &amp; Woodworking</span>
+        <span class="skill-scale" aria-label="Intermediate"><i class="filled"></i><i class="filled"></i><i></i><i></i></span>
+      </li>
+    </ul>
+
+    <h2 style="margin-top:48px;">Scholarships</h2>
+    <ul class="skills-list">
+      <li>Bechtle Architects Scholarship</li>
+      <li>UO Summit Scholarship</li>
+    </ul>
+  </div>
+
+  <div class="cv-col">
+    <div class="about-photo" style="max-width:260px;"><img src="images/about/skiing.jpg" alt="Jonas Cawley skiing at Mt. Bachelor"></div>
+    <div class="about-photo-cap" style="margin-bottom:32px;">Typical college weekend skiing at Mt. Bachelor</div>
+    <h2>Experience</h2>
+    <div class="cv-entry">
+      <span class="years">Jun – Sep 2025</span>
+      <div>
+        <h3 class="display">Tree / Bed Maintenance</h3>
+        <p class="org">Alpha Landscaping</p>
+        <p class="loc">Bozeman, MT</p>
+      </div>
+    </div>
+    <div class="cv-entry">
+      <span class="years">Mar – Jun 2025</span>
+      <div>
+        <h3 class="display">Student Research Assistant</h3>
+        <p class="org">UO Dept. of Landscape Architecture — undergraduate introduction to historical research and field recording techniques</p>
+        <p class="loc">Eugene, OR</p>
+      </div>
+    </div>
+    <div class="cv-entry">
+      <span class="years">Apr – Aug 2024</span>
+      <div>
+        <h3 class="display">FFT2, Lead Sawyer</h3>
+        <p class="org">DustBusters Plus LLC — private emergency response hand crew mitigating wildfire spread and disaster cleanup; suppression, extinguishing, mop-up, and monitoring</p>
+        <p class="loc">Eugene, OR</p>
+      </div>
+    </div>
+    <div class="cv-entry">
+      <span class="years">Mar – Jun 2024</span>
+      <div>
+        <h3 class="display">Student Design Collaborator</h3>
+        <p class="org">OregonBILDS — collaborative design studio creating affordable housing solutions with Habitat for Humanity in Cottage Grove, OR</p>
+        <p class="loc">Eugene, OR</p>
+      </div>
+    </div>
+    <div class="cv-entry">
+      <span class="years">Jun – Sep 2023</span>
+      <div>
+        <h3 class="display">Garde Manger / Expo</h3>
+        <p class="org">Brigade — multitasked and stepped in to keep hospitality smooth in an understaffed kitchen</p>
+        <p class="loc">Bozeman, MT</p>
+      </div>
+    </div>
+    <div class="cv-entry">
+      <span class="years">Jun 2021 – Sep 2022</span>
+      <div>
+        <h3 class="display">Prep Cook</h3>
+        <p class="org">Blackbird</p>
+        <p class="loc">Bozeman, MT</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer id="contact">
+  <div class="foot-grid">
+    <div>
+      <h3>Site</h3>
+      <a href="index.html">Portfolio</a>
+      <a href="about.html">About / CV</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <p>+1 406-589-7988</p>
+      <a href="mailto:jonasfitz.cawley@gmail.com">jonasfitz.cawley@gmail.com</a>
+    </div>
+    <div>
+      <h3>Follow</h3>
+      <a href="https://www.linkedin.com/in/jonas-cawley-aa88ba360/">LinkedIn</a>
+    </div>
+  </div>
+  <div class="foot-brand display">Jonas Cawley</div>
+  <div class="foot-bottom">
+    <span>© 2026 Jonas Cawley</span>
+    <span>Human centered design that's contextually sensitive and environmentally sensible.</span>
+  </div>
+</footer>
+
+</body>
+</html>
